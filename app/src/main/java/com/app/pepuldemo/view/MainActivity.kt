@@ -1,5 +1,6 @@
 package com.app.pepuldemo.view
 
+import android.Manifest
 import android.content.DialogInterface
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +22,8 @@ import com.app.pepuldemo.view.adapters.Adapter
 import com.app.pepuldemo.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.recyclerview.widget.LinearLayoutManager
+import pub.devrel.easypermissions.EasyPermissions
+import java.security.Permission
 
 
 @AndroidEntryPoint
@@ -43,6 +46,7 @@ class MainActivity : AppCompatActivity() {
             pickImageOrVideo()
 
         }
+        aaskPremission()
         adapter = Adapter(this,datas)
         activityMainBinding.feedRv.layoutManager=
             LinearLayoutManager(this)
@@ -72,6 +76,19 @@ class MainActivity : AppCompatActivity() {
 
         homeViewModel.getList()
 
+    }
+
+    private fun aaskPremission() {
+        EasyPermissions.requestPermissions(
+            this,
+            "",
+    123  ,
+            Manifest.permission.READ_EXTERNAL_STORAGE)
+        EasyPermissions.requestPermissions(
+            this,
+            "",
+            123  ,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE)
     }
 
     private val selectImageFromGalleryResult =
